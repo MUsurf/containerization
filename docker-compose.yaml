@@ -1,5 +1,6 @@
 services:
   ros2_container:
+    container_name: ros2_container
     build:
       context: .
     environment:
