@@ -6,7 +6,20 @@ services:
 
     # Enable X11 forwarding.
     environment:
-      - DISPLAY=$DISPLAY
+      # Universal Display handling (Linux, macOS, WSL)
+      # - XAUTHORITY=/tmp/.X11-unix/Xauthority
+      - XAUTHORITY=/root/.Xauthority
+      - DISPLAY=${DISPLAY:-host.docker.internal:0}
+      - QT_X11_NO_MITSHM=1
+      - XDG_RUNTIME_DIR=/tmp/runtime-root
+      - LIBGL_ALWAYS_INDIRECT=1  # OpenGL forwarding
+
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw  # X11 forwarding
+      - /dev/dri:/dev/dri  # GPU Access (Linux)
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+
+      # No support for nvidia GPU (required external script)
+
+    network_mode: "host"  # Direct host access (Linux)
+
