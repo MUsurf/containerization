@@ -1,11 +1,12 @@
 services:
   ros2_container:
     build:
-      context: .
-    
-    
+      context: ../
+      dockerfile: ./containerization/Dockerfile
+
     # Enable X11 forwarding.
     environment:
       - DISPLAY=$DISPLAY
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
+    
