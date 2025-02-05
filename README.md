@@ -23,3 +23,17 @@ MacOS will need to install [XQuartz](https://www.xquartz.org/) to forward the co
 ### SSH config 
 
 Not much modification is required but adding the line `ForwardX11 yes`
+
+### Tutrlesim
+```bash
+docker exec -it (CONTAINER_NAME) bash
+source /opt/ros/$ROS_DISTRO/setup.bash
+source /home/ros2_ws/install/local_setup.bash
+ros2 run turtlesim turtle_node
+```
+
+In a new terminal
+```bash
+docker exec -it (CONTAINER_NAME) bash
+ros2 run turtlesim turtle_teleop_key
+```
