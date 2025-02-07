@@ -5,6 +5,7 @@
 # Using this repo with Docker.
 
 - Pull with `git clone --single-branch --branch turtlesim https://github.com/MUsurf/containerization.git`
+- `cd containerization`
 - Use `docker compose build` to build the container.
 - Use `docker compose up` to run the container. You should see the turtlesim window open up.
 
