@@ -1,9 +1,19 @@
 services:
   ros2_container:
+    # security_opt:
+    #   - apparmor:unconfined
     build:
       context: ../
       dockerfile: ./containerization/Dockerfile
-
+    privileged: true
+    devices:
+        - "/dev:/dev"
+      # - "/dev/gpiomem:/dev/gpiomem"
+      # - "/dev/i2c-1:/dev/i2c-1"
+      # - "/dev/spidev10.0:/dev/spidev10.0"
+    # cap_add:
+    #   - SYS_RAWIO
+    #   - SYS_ADMIN
     # Enable X11 forwarding.
     environment:
       # Universal Display handling (Linux, macOS, WSL)
@@ -18,8 +28,12 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw  # X11 forwarding
       - /dev/dri:/dev/dri  # GPU Access (Linux)
       - $HOME/.Xauthority:/root/.Xauthority:rw
-
+      - "/sys:/sys"
+      - "/proc/device-tree:/proc/device-tree"
+      # Add python libraries
+      - "/usr/local/lib/libgpiod.so:/usr/local/lib/libgpiod.so"
+      - "/usr/local/include:/usr/local/include"
+      - "/proc/cpuinfo/:/proc/cpuinfo/"
       # No support for nvidia GPU (required external script)
 
     network_mode: "host"  # Direct host access (Linux)
-
