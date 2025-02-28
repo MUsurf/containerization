@@ -1,14 +1,21 @@
 # FROM ros:jazzy-ros-base
+# FROM ros:jazzy-ros-base
 
+# # Set Docker's default shell to bash instead of sh.
+# SHELL ["/bin/bash", "-c"] 
 # # Set Docker's default shell to bash instead of sh.
 # SHELL ["/bin/bash", "-c"] 
 
 
 # RUN apt-get update -y && apt-get upgrade -y && apt-get install git -y
+# RUN apt-get update -y && apt-get upgrade -y && apt-get install git -y
 
 # ### Basic workspace setup from https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#creating-a-workspace
 # WORKDIR /home/ros2_ws/src
+# ### Basic workspace setup from https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#creating-a-workspace
+# WORKDIR /home/ros2_ws/src
 
+# COPY ./TapeWorm/ /home/ros2_ws
 # COPY ./TapeWorm/ /home/ros2_ws
 
 # WORKDIR /home/ros2_ws
