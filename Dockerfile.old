@@ -1,3 +1,41 @@
+# FROM ros:jazzy-ros-base
+# FROM ros:jazzy-ros-base
+
+# # Set Docker's default shell to bash instead of sh.
+# SHELL ["/bin/bash", "-c"] 
+# # Set Docker's default shell to bash instead of sh.
+# SHELL ["/bin/bash", "-c"] 
+
+
+# RUN apt-get update -y && apt-get upgrade -y && apt-get install git -y
+# RUN apt-get update -y && apt-get upgrade -y && apt-get install git -y
+
+# ### Basic workspace setup from https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#creating-a-workspace
+# WORKDIR /home/ros2_ws/src
+# ### Basic workspace setup from https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#creating-a-workspace
+# WORKDIR /home/ros2_ws/src
+
+# COPY ./TapeWorm/ /home/ros2_ws
+# COPY ./TapeWorm/ /home/ros2_ws
+
+# WORKDIR /home/ros2_ws
+
+# RUN rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+
+# RUN source /opt/ros/$ROS_DISTRO/setup.bash && \
+#   colcon build --symlink-install
+
+# COPY ./containerization/run.sh /home/ros2_ws/run.sh
+
+# RUN chmod +x /home/ros2_ws/run.sh
+
+# CMD ["/home/ros2_ws/run.sh"]
+
+
+#
+#
+#
+#
 FROM ros:jazzy-ros-base
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -36,11 +74,17 @@ RUN apt install -y \
   
 RUN apt install --upgrade python3-setuptools
 
+# Remove extra install
+# RUN pip3 uninstall -y RPi.GPIO --break-system-packages
+
 # Install packages not availble through system
 RUN python3 -m pip install --upgrade adafruit-circuitpython-pca9685 adafruit-blinka adafruit-python-shell rpi-lgpio --break-system-packages
 
 RUN apt-get install -y i2c-tools libgpiod-dev python3-libgpiod && \
   pip3 uninstall -y RPi.GPIO --break-system-packages
+
+
+
 
 
 ENV BLINKA_FORCEBOARD=RASPBERRY_PI_5
@@ -50,6 +94,15 @@ ENV BLINKA_FORCEBOARD=RASPBERRY_PI_5
 WORKDIR /home/ros2_ws/src
 
 COPY ./TapeWorm/ /home/ros2_ws/src/
+
+
+
+
+# WORKDIR /home/ros2_ws
+
+# RUN git clone https://github.com/MUsurf/JellyRos2.git -b motor_test src && \
+#   cd ./src && \
+#   git pull origin motor_test
 
 
 WORKDIR /home/ros2_ws
@@ -76,3 +129,10 @@ RUN chmod +x /entrypoint.sh
 
 
 CMD ["/home/ros2_ws/run.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
+
+
+
+
+
+#apt-get install raspberrypi-kernel-headers
