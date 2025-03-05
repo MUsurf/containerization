@@ -6,49 +6,39 @@ ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"] 
 
 
-RUN apt-get update -y && apt-get upgrade -y 
-
-RUN apt-get install git -y
-
 RUN apt-get update && apt-get install -y \
-    lsb-release \
-    wget \
-    curl \
-    gnupg2 \
-    python3 \
-    python3-pip \
-    screen \
-    nano \
-    software-properties-common \
-    i2c-tools \
-    libgpiod-dev \
-    python3-libgpiod \
-    libgpiod-doc
+  git \
+  lsb-release \
+  wget \
+  curl \
+  gnupg2 \
+  python3 \
+  python3-pip \
+  screen \
+  nano \
+  software-properties-common \
+  i2c-tools \
+  libgpiod-dev \
+  python3-libgpiod \
+  libgpiod-doc
 
 # Ensure Python 3 is the default python version
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 
 # Install pip packages
-RUN apt install -y \
-  python3-numpy \
-  python3-regex 
+RUN apt update && apt install -y --upgrade \
+  # python3-numpy \
+  # python3-regex \
+  python3-setuptools
   
-RUN apt install --upgrade python3-setuptools
 
 # Install packages not availble through system
-RUN python3 -m pip install --upgrade adafruit-circuitpython-pca9685 adafruit-blinka adafruit-python-shell rpi-lgpio --break-system-packages
-
-RUN apt-get install -y i2c-tools libgpiod-dev python3-libgpiod && \
-  pip3 uninstall -y RPi.GPIO --break-system-packages
-
-
-ENV BLINKA_FORCEBOARD=RASPBERRY_PI_5
+RUN python3 -m pip install --upgrade adafruit-circuitpython-pca9685 adafruit-blinka adafruit-python-shell rpi-lgpio --break-system-packages && \
+  python3 -m pip uninstall -y RPi.GPIO --break-system-packages
 
 
 ### Basic workspace setup from https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#creating-a-workspace
-WORKDIR /home/ros2_ws/src
-
 COPY ./TapeWorm/ /home/ros2_ws/src/
 
 
