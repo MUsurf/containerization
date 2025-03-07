@@ -37,7 +37,7 @@ RUN apt install -y \
 RUN apt install --upgrade python3-setuptools
 
 # Install packages not availble through system
-RUN python3 -m pip install --upgrade adafruit-circuitpython-pca9685 adafruit-blinka adafruit-python-shell rpi-lgpio --break-system-packages
+RUN python3 -m pip install --upgrade adafruit-circuitpython-pca9685 adafruit-blinka adafruit-python-shell rpi-lgpio --break-system-packages opencv-python
 
 RUN apt-get install -y i2c-tools libgpiod-dev python3-libgpiod && \
   pip3 uninstall -y RPi.GPIO --break-system-packages
