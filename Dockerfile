@@ -51,9 +51,9 @@ WORKDIR /home/ros2_ws
 # If you add a package to the TapeWorm directory you can add it here. 
 # Make sure you follow this syntax: "--mount=type=bind,source=./TapeWorm/<your_new_package>/package.xml,target=/home/ros2_ws/deps/<your_new_package>/package.xml \"
 # Bind mounts are whitespace sensitive. You can copy and paste the given syntax and replace <your_new_package> with the name of the package you want to add.
-RUN --mount=type=bind,source=./TapeWorm/motor_controller/package.xml,target=/home/ros2_ws/deps/motor_controller/package.xml \
-    --mount=type=bind,source=./TapeWorm/motor_runner/package.xml,target=/home/ros2_ws/deps/motor_runner/package.xml \
-    --mount=type=bind,source=./TapeWorm/process_depth/package.xml,target=/home/ros2_ws/deps/process_depth/package.xml \
+#RUN #--mount=type=bind,source=./TapeWorm/motor_controller/package.xml,target=/home/ros2_ws/deps/motor_controller/package.xml \
+    #--mount=type=bind,source=./TapeWorm/motor_runner/package.xml,target=/home/ros2_ws/deps/motor_runner/package.xml \
+RUN --mount=type=bind,source=./TapeWorm/process_depth/package.xml,target=/home/ros2_ws/deps/process_depth/package.xml \
     --mount=type=bind,source=./TapeWorm/process_imu/package.xml,target=/home/ros2_ws/deps/process_imu/package.xml \
     rosdep update && \
     rosdep install -i --from-path ./deps --rosdistro $ROS_DISTRO -y
