@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
   python3 \
   python3-pip \
   screen \
-  nano \
   software-properties-common \
   i2c-tools \
   libgpiod-dev \
@@ -55,6 +54,7 @@ WORKDIR /home/ros2_ws
     #--mount=type=bind,source=./TapeWorm/motor_runner/package.xml,target=/home/ros2_ws/deps/motor_runner/package.xml \
 RUN --mount=type=bind,source=./TapeWorm/process_depth/package.xml,target=/home/ros2_ws/deps/process_depth/package.xml \
     --mount=type=bind,source=./TapeWorm/process_imu/package.xml,target=/home/ros2_ws/deps/process_imu/package.xml \
+    --mount=type=bind,source=./TapeWorm/imu/package.xml,target=/home/ros2_ws/deps/ros-imu-bno055/package.xml \
     rosdep update && \
     rosdep install -i --from-path ./deps --rosdistro $ROS_DISTRO -y
 
