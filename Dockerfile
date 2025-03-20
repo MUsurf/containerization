@@ -55,6 +55,7 @@ WORKDIR /home/ros2_ws
 RUN --mount=type=bind,source=./TapeWorm/process_depth/package.xml,target=/home/ros2_ws/deps/process_depth/package.xml \
     --mount=type=bind,source=./TapeWorm/process_imu/package.xml,target=/home/ros2_ws/deps/process_imu/package.xml \
     --mount=type=bind,source=./TapeWorm/imu/package.xml,target=/home/ros2_ws/deps/ros-imu-bno055/package.xml \
+    --mount=type=bind,source=./TapeWorm/image_recognition/package.xml,target=/home/ros2_ws/deps/image_recognition/package.xml \
     rosdep update && \
     rosdep install -i --from-path ./deps --rosdistro $ROS_DISTRO -y
 
