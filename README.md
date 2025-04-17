@@ -16,7 +16,10 @@
 
 - Install Docker.
 - Enable i2c.
-
+- Ground goes to 6
+- scl goes to 5
+- sda goes to 3
+- vin (vcc) goes to 2
 ---
 
 ## Launching Code
