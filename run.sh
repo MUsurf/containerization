@@ -6,5 +6,5 @@ source /opt/ros/$ROS_DISTRO/setup.bash && \
   # ros2 launch motor_command motors.py
   # ros2 run motor_command motor_runner
   # ros2 run motor_command motor_listener
-  ros2 run imu_bno55 bno055_i2c_node
+  ros2 run imu bno055_i2c_node
   
