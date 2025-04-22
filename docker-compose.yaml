@@ -22,6 +22,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw  # X11 forwarding
       - /dev/dri:/dev/dri  # GPU Access (Linux)
       - $HOME/.Xauthority:/root/.Xauthority:rw
+      - ./logs:/root/.ros/log/
       # No support for nvidia GPU (required external script)
 
     network_mode: "host"  # Direct host access (Linux)
