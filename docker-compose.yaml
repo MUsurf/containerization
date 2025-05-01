@@ -17,6 +17,7 @@ services:
       - QT_X11_NO_MITSHM=1
       - XDG_RUNTIME_DIR=/tmp/runtime-root
       - LIBGL_ALWAYS_INDIRECT=1  # OpenGL forwarding
+      - MOTOR_LAUNCH_DEFAULT=1
 
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw  # X11 forwarding
