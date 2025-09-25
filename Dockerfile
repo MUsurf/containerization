@@ -33,7 +33,7 @@ RUN apt update && apt install -y --upgrade \
   
 
 # Install packages not availble through system
-RUN python3 -m pip install --upgrade adafruit-circuitpython-pca9685 adafruit-blinka adafruit-python-shell rpi-lgpio --break-system-packages && \
+RUN python3 -m pip install --upgrade adafruit-circuitpython-pca9685 adafruit-circuitpython-bno055 adafruit-blinka adafruit-python-shell rpi-lgpio --break-system-packages && \
   python3 -m pip uninstall -y RPi.GPIO --break-system-packages
 
 
@@ -53,7 +53,7 @@ WORKDIR /home/ros2_ws
 RUN --mount=type=bind,source=./TapeWorm/process_depth/package.xml,target=/home/ros2_ws/deps/process_depth/package.xml \
     --mount=type=bind,source=./TapeWorm/process_imu/package.xml,target=/home/ros2_ws/deps/process_imu/package.xml \
     --mount=type=bind,source=./TapeWorm/imu/package.xml,target=/home/ros2_ws/deps/ros-imu-bno055/package.xml \
-    --mount=type=bind,source=./TapeWorm/py_launch/package.xml,target=/home/ros2_ws/deps/py_launch/package.xml \
+#    --mount=type=bind,source=./TapeWorm/py_launch/package.xml,target=/home/ros2_ws/deps/py_launch/package.xml \
     --mount=type=bind,source=./TapeWorm/motor_command/package.xml,target=/home/ros2_ws/deps/motor_command/package.xml \
     rosdep update && \
     rosdep install -i --from-path ./deps --rosdistro $ROS_DISTRO -y
@@ -75,5 +75,6 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 COPY ./containerization/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-
-CMD ["/home/ros2_ws/run.sh"]
+# CMD ["screen", "-dmS", "my_session", "/home/ros2_ws/run.sh"]
+CMD ["bash", "-c", "screen -dmS my_session /home/ros2_ws/run.sh && tail -f /dev/null"]
+# CMD ["/home/ros2_ws/run.sh"]
